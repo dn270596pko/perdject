@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Entity
 public class Cart {
 
@@ -49,7 +48,8 @@ public class Cart {
 
     // Метод для оформления заказа (перевода товаров из корзины в заказ и т.д.)
     public Order createOrder() {
-        return new Order(user, cartItems);
+        Order order = new Order(user, cartItems); // Здесь создаем заказ, передавая пользователю и список элементов корзины
+        return order;
     }
 
     public Long getId() {

@@ -32,12 +32,15 @@ public class Order {
     @OneToMany(mappedBy = "order")
     private List<OrderDetail> orderDetails;
 
-    public Order(User user, List<CartItem> cartItems) {
+    @Transient
+    private List<CartItem> cartItems;
+
+    public Order() {
     }
 
-    public Order(User user, List<OrderDetail> orderDetails) {
+    public Order(User user, List<CartItem> cartItems) {
         this.user = user;
-        this.orderDetails = orderDetails;
+        this.cartItems = cartItems;
         this.status = OrderStatus.CREATED;
         this.creationDate = new Date();
         this.modificationDate = new Date();

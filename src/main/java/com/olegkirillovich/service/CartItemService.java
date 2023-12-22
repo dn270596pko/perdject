@@ -1,3 +1,4 @@
+// CartItemService.java
 package com.olegkirillovich.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,4 @@ public class CartItemService {
         return cartItemRepository.findByCart_User_Id(userId);
     }
 
-    // Другие методы ебану позже
 }

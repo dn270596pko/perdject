@@ -1,9 +1,11 @@
 package com.olegkirillovich.service;
 
+import com.olegkirillovich.model.CartItem;
+import com.olegkirillovich.model.Order;
+import com.olegkirillovich.model.User;
+import com.olegkirillovich.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.olegkirillovich.model.Order;
-import com.olegkirillovich.repository.OrderRepository;
 
 import java.util.List;
 
@@ -17,18 +19,17 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    public List<Order> getAllOrders() {
-        return orderRepository.findAll();
+    public List<Order> getOrdersByUser(User user) {
+        return orderRepository.findByUser(user);
     }
 
-    public Order createOrder(Order order) {
-        // Здесь позже заебашу логику для создания заказа, например, расчет общей суммы и т.д.
+    public Order createOrder(User user, List<CartItem> cartItems, double totalAmount) {
+        Order order = new Order(user, cartItems, totalAmount);
+        order.calculateTotalAmount(); // Вызываем метод для расчета totalAmount
         return orderRepository.save(order);
     }
 
-    public Order getOrderById(Long orderId) {
-        return orderRepository.findById(orderId).orElse(null);
-    }
+    public void placeOrder(Order order) {
 
-    // Другие методы ебану позже
+    }
 }

@@ -24,13 +24,6 @@ public class CartItem {
     public CartItem() {
     }
 
-    public CartItem(Cart cart, Product product, int quantity, double price) {
-        this.cart = cart;
-        this.product = product;
-        this.quantity = quantity;
-        this.price = price;
-    }
-
     public Long getId() {
         return id;
     }

@@ -6,7 +6,6 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-
 @Entity
 public class Order {
 
@@ -22,6 +21,12 @@ public class Order {
 
     private String address;
 
+    public void calculateTotalAmount() {
+        this.totalAmount = cartItems.stream()
+                .mapToDouble(cartItem -> cartItem.getPrice() * cartItem.getQuantity())
+                .sum();
+    }
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -35,16 +40,9 @@ public class Order {
     @Transient
     private List<CartItem> cartItems;
 
-    public Order() {
-    }
+    private double totalAmount;
 
-    public Order(User user, List<CartItem> cartItems) {
-        this.user = user;
-        this.cartItems = cartItems;
-        this.status = OrderStatus.CREATED;
-        this.creationDate = new Date();
-        this.modificationDate = new Date();
-        this.address = user.getShippingAddress();
+    public Order(User user, List<CartItem> cartItems, double totalAmount) {
     }
 
     public Long getId() {
@@ -101,5 +99,21 @@ public class Order {
 
     public void setOrderDetails(List<OrderDetail> orderDetails) {
         this.orderDetails = orderDetails;
+    }
+
+    public List<CartItem> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
+    }
+
+    public double getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(double totalAmount) {
+        this.totalAmount = totalAmount;
     }
 }

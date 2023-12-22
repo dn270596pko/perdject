@@ -24,13 +24,6 @@ public class OrderDetail {
     public OrderDetail() {
     }
 
-    public OrderDetail(Order order, Product product, int quantity, double price) {
-        this.order = order;
-        this.product = product;
-        this.quantity = quantity;
-        this.price = price;
-    }
-
     public Long getId() {
         return id;
     }
@@ -69,6 +62,10 @@ public class OrderDetail {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public double getSubtotal() {
+        return quantity * price;
     }
 
     @Override

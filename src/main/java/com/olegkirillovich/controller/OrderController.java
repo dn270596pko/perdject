@@ -5,12 +5,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class UserController {
+public class OrderController {
 
-    @GetMapping("/profile")
-    public String viewProfile(Model model) {
-        // Логика для отображения профиля пользователя
-        return "profile";
+    @GetMapping("/orders")
+    public String viewOrders(Model model) {
+        // Логика для отображения списка заказов
+        return "orders";
     }
 
     // потом добавлю методі еще

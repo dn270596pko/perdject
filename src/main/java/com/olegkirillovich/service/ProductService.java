@@ -1,9 +1,9 @@
 package com.olegkirillovich.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.olegkirillovich.model.Product;
 import com.olegkirillovich.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -24,6 +24,4 @@ public class ProductService {
     public Product getProductById(Long productId) {
         return productRepository.findById(productId).orElse(null);
     }
-
-    // Другие методы заебашу позже
 }

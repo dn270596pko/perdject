@@ -1,8 +1,9 @@
 package com.olegkirillovich.model;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Product {
@@ -14,19 +15,7 @@ public class Product {
     private String name;
     private double price;
 
-    @ManyToMany(mappedBy = "products")
-    private Set<Category> categories = new HashSet<>();
-
-    @ManyToOne
-    @JoinColumn(name = "discount_id")
-    private Discount discount;
-
     public Product() {
-    }
-
-    public Product(String name, double price) {
-        this.name = name;
-        this.price = price;
     }
 
     public Long getId() {
@@ -51,21 +40,5 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public Set<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(Set<Category> categories) {
-        this.categories = categories;
-    }
-
-    public Discount getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(Discount discount) {
-        this.discount = discount;
     }
 }

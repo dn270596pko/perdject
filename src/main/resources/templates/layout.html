@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Store Pankovich</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #444;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Шапка сайта -->
+<header>
+    <h1>Online Store Pankovich</h1>
+</header>
+
+<!-- Навигация -->
+<nav>
+    <!-- Не забіть добавить сілку на страницу оформления заказа -->
+    <a href="/checkout">Checkout</a>
+    <!-- Не забіть сілку на страницу подтверждения заказа -->
+    <a href="/confirmation">Order Confirmation</a>
+</nav>
+
+<!-- Основное содержимое страницы -->
+<main>
+    <div th:replace="content :: main"></div>
+</main>
+
+</body>
+</html>

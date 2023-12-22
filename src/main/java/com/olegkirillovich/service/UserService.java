@@ -30,6 +30,4 @@ public class UserService {
             return principal.toString();
         }
     }
-
-    // Другие методы ебану позже
 }

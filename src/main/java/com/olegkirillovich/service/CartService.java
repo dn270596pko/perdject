@@ -1,16 +1,14 @@
 package com.olegkirillovich.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.olegkirillovich.model.Cart;
 import com.olegkirillovich.model.CartItem;
-import com.olegkirillovich.model.Product;
 import com.olegkirillovich.repository.CartItemRepository;
-
+import com.olegkirillovich.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.olegkirillovich.model.*;
-import com.olegkirillovich.repository.CartRepository;
+import com.olegkirillovich.model.CartItem;
+import com.olegkirillovich.model.Cart;
+
 
 import java.util.List;
 
@@ -18,46 +16,41 @@ import java.util.List;
 public class CartService {
 
     private final CartRepository cartRepository;
+    private final CartItemRepository cartItemRepository;
 
     @Autowired
-    public CartService(CartRepository cartRepository) {
+    public CartService(CartRepository cartRepository, CartItemRepository cartItemRepository) {
         this.cartRepository = cartRepository;
+        this.cartItemRepository = cartItemRepository;
     }
 
-    public Cart getCartByUser(User user) {
-        return cartRepository.findByUser(user);
+    public Cart getCartById(Long cartId) {
+        return cartRepository.findById(cartId).orElse(null);
     }
 
-    public void addToCart(User user, Product product) {
-        Cart cart = getCartByUser(user);
-        List<CartItem> items = cart.getCartItems();
-        for (CartItem item : items) {
-            if (item.getProduct().equals(product)) {
-                item.setQuantity(item.getQuantity() + 1);
-                cartRepository.save(cart);
-                return;
-            }
-        }
-        CartItem newItem = new CartItem();
-        newItem.setProduct(product);
-        newItem.setQuantity(1);
-        newItem.setCart(cart);
-        items.add(newItem);
-        cartRepository.save(cart);
+    public Cart createCart() {
+        Cart cart = new Cart();
+        return cartRepository.save(cart);
     }
 
-    public void removeFromCart(User user, Product product) {
-        Cart cart = getCartByUser(user);
-        List<CartItem> items = cart.getCartItems();
-        items.removeIf(item -> item.getProduct().equals(product));
-        cartRepository.save(cart);
+    public void addToCart(Cart cart, CartItem cartItem) {
+        cartItem.setCart(cart);
+        cartItemRepository.save(cartItem);
     }
 
-    public void placeOrder(Cart cart) {
-        // Здесь потом будет логика для оформления заказа
+    public void removeFromCart(Cart cart, CartItem cartItem) {
+        List<CartItem> cartItems = cart.getCartItems();
+        cartItems.remove(cartItem);
+        cartItemRepository.delete(cartItem);
+        cartRepository.save((Cart) cart);
+    }
+
+    public List<CartItem> getCartItems(Cart cart) {
+        return cart.getCartItems();
+    }
+
+    public void clearCart(Cart cart) {
         cart.getCartItems().clear();
-        cartRepository.save(cart);
+        cartRepository.save((Cart) cart);
     }
-
-    // Другие методы бизнес-логики для работы с корзиной заебашу позже
 }

@@ -13,5 +13,5 @@ public class ProductController {
         return "products";
     }
 
-    // потом добавлю методі еще
+    // Потом добавлю еще методы
 }

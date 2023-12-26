@@ -13,5 +13,5 @@ public class UserController {
         return "profile";
     }
 
-    // потом добавлю методі еще
+    // Потом добавлю еще методы
 }

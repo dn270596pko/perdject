@@ -1,4 +1,3 @@
-// CartItemService.java
 package com.olegkirillovich.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ public class CartItemService {
     }
 
     public List<CartItem> getCartItemsByUserId(Long userId) {
-        return cartItemRepository.findByCart_User_Id(userId);
+        return cartItemRepository.findByUser_Id(userId);
     }
 
 }

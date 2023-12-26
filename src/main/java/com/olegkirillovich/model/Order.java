@@ -1,11 +1,13 @@
 package com.olegkirillovich.model;
 
 import com.olegkirillovich.util.OrderStatus;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+@Data
 @Entity
 public class Order {
 
@@ -20,12 +22,6 @@ public class Order {
     private Date modificationDate;
 
     private String address;
-
-    public void calculateTotalAmount() {
-        this.totalAmount = cartItems.stream()
-                .mapToDouble(cartItem -> cartItem.getPrice() * cartItem.getQuantity())
-                .sum();
-    }
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -42,7 +38,13 @@ public class Order {
 
     private double totalAmount;
 
+    public Order() {
+    }
+
     public Order(User user, List<CartItem> cartItems, double totalAmount) {
+        this.user = user;
+        this.cartItems = cartItems;
+        this.totalAmount = totalAmount;
     }
 
     public Long getId() {
@@ -115,5 +117,11 @@ public class Order {
 
     public void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
+    }
+
+    public void calculateTotalAmount() {
+        this.totalAmount = cartItems.stream()
+                .mapToDouble(cartItem -> cartItem.getPrice() * cartItem.getQuantity())
+                .sum();
     }
 }

@@ -19,5 +19,5 @@ public class CartController {
         return "checkout";
     }
 
-    // потом добавлю методі еще
+    // Потом добавлю еще методы
 }

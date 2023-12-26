@@ -13,5 +13,5 @@ public class OrderController {
         return "orders";
     }
 
-    // потом добавлю методі еще
+    // Потом добавлю еще методы
 }

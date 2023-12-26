@@ -1,3 +1,4 @@
+// CartItem.java
 package com.olegkirillovich.model;
 
 import lombok.Data;
@@ -27,12 +28,13 @@ public class CartItem {
     public CartItem() {
     }
 
-    public CartItem(User user, Product product, int quantity, double price) {
-        this.user = user;
+    public CartItem(Product product, int quantity, double price) {
         this.product = product;
         this.quantity = quantity;
         this.price = price;
     }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -44,5 +46,9 @@ public class CartItem {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

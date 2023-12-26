@@ -1,3 +1,4 @@
+// CartItemService.java
 package com.olegkirillovich.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,4 +22,9 @@ public class CartItemService {
         return cartItemRepository.findByUser_Id(userId);
     }
 
+    public double calculateTotalAmount(List<CartItem> cartItems) {
+        return cartItems.stream()
+                .mapToDouble(cartItem -> cartItem.getPrice() * cartItem.getQuantity())
+                .sum();
+    }
 }
